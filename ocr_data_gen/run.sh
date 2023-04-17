@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# clone https://github.com/Belval/TextRecognitionDataGenerator to use this file,
+# and add/replace "fonts" to "trdg/fonts" (contains various license plate style fonts)
 # creates OCR data using fonts in "trdg/fonts/latin/" with the following options:
 
 # -c [COUNT] = 50
