@@ -1,0 +1,37 @@
+set up an SSH key
+
+look up what conda init is?
+
+ssh username@mavrik2.tacc.utexas.edu
+
+pasword
+token code
+
+https://portal.tacc.utexas.edu/
+
+https://portal.tacc.utexas.edu/tutorials/multifactor-authentication
+
+stampede 2 tutorial,
+transfering files
+rsync or scp.
+
+
+https://hpcc.umd.edu/hpcc/help/examples/submission-pythonmpi.html
+
+idev--helppp
+
+
+need to have the #!/bin/bash
+
+jobs (partiions name (gtx (normal node), p100 and v100), no of nodes, no of tasks per node and the run time****)
+sq
+
+sbatch <filename>
+
+alias
+
+Allocation name depending on more than one or not.
+
+scp 
+
+
