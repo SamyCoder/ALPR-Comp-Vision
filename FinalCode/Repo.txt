@@ -1,0 +1,1 @@
+Clone the repo from the link: https://github.com/mikel-brostrom/Yolov7_StrongSORT_OSNet
