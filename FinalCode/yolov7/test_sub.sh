@@ -1,6 +1,6 @@
 # detect.py
 executable      = test_lp.py
-arguments       = "--source ../../test/sample/*/* --weights ../weights/yolov7.pt --conf 0.25 --save-txt-lp --save-txt --nosave --save-conf --device 0 --classes 1 2 3 5 7"
+arguments       = "--source ../../test/sample/*/* --weights ../weights/yolov7.pt --conf 0.25 --save-txt-lp --nosave --save-conf --device 0 --classes 1 2 3 5 7"
 output          = lp_test_yolo_ocr_output.txt
 log             = lp_test_yolo_ocr_log.log
 error 		= lp_test_yolo_ocr_error.log
@@ -21,3 +21,4 @@ requirements = InMastodon
 
 queue
 
+#"--source ../../test/sample/*/* --weights ../weights/yolov7.pt --conf 0.25 --save-txt-lp --save-txt --nosave --save-conf --device 0 --classes 1 2 3 5 7"
