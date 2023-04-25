@@ -304,15 +304,19 @@ def detect(save_img=False):
                             #easyocr_result = easyocr_reader.recognize(lp_im0)#,paragraph="False")   
                             easyocr_result = easyocr_reader.readtext(lp_im0)     #readtext works better thatn recognize                                     
                             ocr_label = " "  
+                            ocr_label_temp = ''
                             #print("easy results:",easyocr_result)                    
                             #doing for each license plate
                             for res in easyocr_result:
                                 if res[2] > 0.1:
                                     ocr_label += res[1] + " "+f'{res[2]:.2f} '
+                                    ocr_label_temp += res[1]
                                     #-----------------------------------------------------
                                     #this regular expression only return alphabets and numbers
                                     if true_lp_txt in re.sub('[^A-Za-z0-9]+', '', res[1]):
                                         correct_lp_txt+=1
+                                        with open(str(save_dir) + '/correct_lp_text.txt', 'a') as f_test1:
+                                            f_test1.write(f"{frame_idx+1} {vehc_id} predicted_txt: {ocr_label_temp} true_txt :{true_lp_txt} + \n")
                                     #-----------------------------------------------------
                          
                             label_lp = label_lp + ocr_label
@@ -328,10 +332,12 @@ def detect(save_img=False):
                             #print('\n\nious:',ious)
                             if ious[0][0]>0.7:
                                 correct_lp_bb+=1
+                                with open(str(save_dir) + '/correct_lp_bb.txt', 'a') as f_test1:
+                                    f_test1.write(f"{frame_idx+1} {vehc_id} correct_lp :{correct_lp_bb} + \n")
                             else:
                                 with open(str(save_dir) + '/test.txt', 'a') as f_test:
                                     f_test.write(f"{frame_idx} {vehc_id} iou :{ious[0][0]} + \n")
-                                cv2.imwrite(lp_path+str(frame_idx+1)+'_'+str(vehc_id)+"_"+ocr_label+'.jpg',car_im0)
+                                #cv2.imwrite(lp_path+str(frame_idx+1)+'_'+str(vehc_id)+"_"+ocr_label+'.jpg',car_im0)
                             #----------------------------------------------
 
                             for *xyxy_lp, conf_lp, cls_lp in reversed(lp_det):
@@ -343,7 +349,8 @@ def detect(save_img=False):
                                     
                                     with open(txt_path + '.txt', 'a') as f:
                                         #f.write(('%g ' * len(line_lp)).rstrip() % line_lp + '\n')
-                                        f.write(('%g ' * 11) % (frame_idx + 1,vehc_id,xywhs_lp[0],xywhs_lp[1],xywhs_lp[2],xywhs_lp[3], -1, -1,-1,-1, i))
+                                        #f.write(('%g ' * 11) % (frame_idx + 1,vehc_id,xywhs_lp[0],xywhs_lp[1],xywhs_lp[2],xywhs_lp[3], -1, -1,-1,-1, i))
+                                        f.write(('%g ' * 10) % (frame_idx + 1,xywhs_lp[0],xywhs_lp[1],xywhs_lp[2],xywhs_lp[3], -1, -1,-1,-1, i))
                                         f.write(" "+str(p.stem) +" " + label_lp +'true label - ' + true_lp_txt  + '\n')
                                 if save_lp:
                                     
@@ -413,14 +420,14 @@ def detect(save_img=False):
     dataset_length = len(dataset)
     print(f"correct lp bb count:{correct_lp_bb}/{dataset_length}")
     print(f"correct lp txt count:{correct_lp_txt}/{dataset_length}")
-    print(f"correct make txt count:{correct_make_txt}/{dataset_length}")
+    #print(f"correct make txt count:{correct_make_txt}/{dataset_length}")
     with open(str(save_dir) + '/test.txt', 'a') as f_test:
         f_test.write(f"correct lp bb count:{correct_lp_bb}/{dataset_length}")
         f_test.write(f"\ncorrect lp txt count:{correct_lp_txt}/{dataset_length}")
-        f_test.write(f"\ncorrect make txt count:{correct_make_txt}/{dataset_length}")
+    #    f_test.write(f"\ncorrect make txt count:{correct_make_txt}/{dataset_length}")
     print(f'Done. ({time.time() - t0:.3f}s)')
 
-    print(f'Done. ({time.time() - t0:.3f}s)')
+
 
 
 if __name__ == '__main__':
