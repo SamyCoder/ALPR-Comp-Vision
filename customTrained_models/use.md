@@ -8,3 +8,5 @@ How to use these custom ocr models?
 reader = easyocr.Reader(['en'], recog_network='custom_model')
 
 4. Note that we still need easyocr package and remember to name all the 3 files above (.py, .yaml, .pth) same.
+
+The custom_model.py and custom_model.yaml files are present here.
